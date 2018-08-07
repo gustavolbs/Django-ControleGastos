@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Django learn - Home</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            background-color: #ccc;
+        }
+        td {
+            background-color: #eee;
+            text-align: center;
+        }
+        th {
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function Nova() {
+            location.href="form/"
+        }
+    </script>
+</head>
+<body>
+    <h1>Seja bem vindo</h1>
+    <p>Agora são: {{ now }}</p>
+    <p>Deseja resgistrar uma nova transação?<input type="button" value="Nova Transação" onclick="Nova()"></p>
+    <p>Clique sobre o <b>número/ID</b> da transação para atualizá-la.</p>
+{#    <p>Deseja resgistrar uma nova transação?<a href="{% url 'url_novaTransacao' %}">Nova Transação</a></p>#}
+
+    <table>
+        <tr>
+            <th>Transação</th>
+            <th>Categoria</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>Data</th>
+            <th>Observações</th>
+        </tr>
+    {% for transacao in transacoes %}
+        {% if forloop.counter|divisibleby:2 %}
+            <tr>
+                <td style="background-color: #fff;"><a href="{% url 'url_update' transacao.id %}">{{ transacao.id }}</a></td>
+                <td style="background-color: #fff;">{{ transacao.categoria }}</td>
+                <td style="background-color: #fff;">{{ transacao.descricao }}</td>
+                <td style="background-color: #fff;">{{ transacao.quantidade }}</td>
+                <td style="background-color: #fff; text-align: left">R$ {{ transacao.valor }}</td>
+                <td style="background-color: #fff;">{{ transacao.data }}</td>
+                <td style="background-color: #fff;">{{ transacao.observacoes }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td><a href="{% url 'url_update' transacao.id %}">{{ transacao.id }}</a></td>
+                <td>{{ transacao.categoria }}</td>
+                <td>{{ transacao.descricao }}</td>
+                <td>{{ transacao.quantidade }}</td>
+                <td style="text-align: left">R$ {{ transacao.valor }}</td>
+                <td>{{ transacao.data }}</td>
+                <td>{{ transacao.observacoes }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
