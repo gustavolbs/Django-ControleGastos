@@ -13,7 +13,7 @@ class Categoria(models.Model):
 class Transacao(models.Model):
     data = models.DateTimeField(default=now())
     descricao = models.CharField(max_length=200)
-    valor = models.DecimalField(max_digits=7, decimal_places=2)
+    valor = models.DecimalField(max_digits=9, decimal_places=2)
     quantidade = models.IntegerField(default=1, max_length=100)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     observacoes = models.TextField(null=True, blank=True)
