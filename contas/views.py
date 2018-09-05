@@ -17,7 +17,6 @@ def nova_transacao(request):
     if form.is_valid() and request.user.is_superuser():
         form.save()
         return redirect('url_home')
-
     return render(request, "contas/form.html", {"form": form})
 
 def update(request, pk):
@@ -33,6 +32,5 @@ def delete(request, pk):
     if request.user.is_superuser():
     	transacao.delete()
     	return redirect('url_home')
-    else:
-    	return redirect('url_home')
+	return redirect('url_home')
     
