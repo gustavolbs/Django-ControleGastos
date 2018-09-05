@@ -15,18 +15,18 @@ def home(request):
 def nova_transacao(request):
     form = TransacaoForm(request.POST or None)
     if form.is_valid():
-     # and request.user.is_superuser():
-        form.save()
-        return redirect('url_home')
+    	if request.user.is_superuser():
+        	form.save()
+        	return redirect('url_home')
     return render(request, "contas/form.html", {"form": form})
 
 def update(request, pk):
     transacao = Transacao.objects.get(pk=pk)
     form = TransacaoForm(request.POST or None, instance=transacao)
     if form.is_valid():
-     # and request.user.is_superuser():
-        form.save()
-        return redirect('url_home')
+    	if request.user.is_superuser():
+    		form.save()
+    		return redirect('url_home')
     return render(request, "contas/form.html", {"form": form, "transacao": transacao})
 
 def delete(request, pk):
