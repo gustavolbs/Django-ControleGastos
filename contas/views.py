@@ -15,9 +15,11 @@ def home(request):
 def nova_transacao(request):
     form = TransacaoForm(request.POST or None)
     if form.is_valid():
-    	if request.user.is_superuser:
-        	form.save()
-        	return redirect('url_home')
+	    if request.user.is_superuser:
+		    form.save()
+		    return redirect('url_home')
+	    else: 
+		    return redirect('url_notSuper')
     return render(request, "contas/form.html", {"form": form})
 
 def update(request, pk):
@@ -27,10 +29,18 @@ def update(request, pk):
     	if request.user.is_superuser:
     		form.save()
     		return redirect('url_home')
+    	else:
+		    return notSuper(request)
     return render(request, "contas/form.html", {"form": form, "transacao": transacao})
 
 def delete(request, pk):
     transacao = Transacao.objects.get(pk=pk)
     if request.user.is_superuser:
     	transacao.delete()
-    return redirect('url_home')
+    	return redirect('url_home')
+    else:
+	    return redirect('url_notSuper')
+
+def notSuper(request):
+	return render(request, 'contas/notSuper.html')
+		
