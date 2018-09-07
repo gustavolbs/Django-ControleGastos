@@ -3,17 +3,19 @@ from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, get_template
 from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
+from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from contas.tokens import account_activation_token
 from .models import Transacao
 from .form import TransacaoForm, SignUpForm
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
+from django.template import Context
 
-import datetime
+import datetime, time
 
 # Create your views here.
 
@@ -73,21 +75,20 @@ def signUp(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            current_site = get_current_site(request)
-            subject = 'Ative sua conta Controller-Gastos'
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            token = account_activation_token.make_token(user)
-            activation_link = "{0}/?uid={1}&token{2}".format(current_site, uid, token)
-            email_from = settings.EMAIL_HOST_USER
-            # user_email = [user.email]
-            to_email = [form.cleaned_data.get('email')]
+            current_site, uid, token = get_current_site(request), urlsafe_base64_encode(force_bytes(user.pk)).decode(), account_activation_token.make_token(user)
+            subject, email_from, to_email = 'Ative sua conta Controller-Gastos', settings.EMAIL_HOST_USER, [form.cleaned_data.get('email')]
+
+            activation_link = "{0}/activate/{1}/{2}".format(current_site, uid, token)
             message = "Hello {0},\n {1}".format(user.username, activation_link)
-            send_mail(subject, message, email_from, to_email)
-            return HttpResponse('Please confirm your email address to complete the registration')
+
+            html_content = render_to_string('contas/activate.html', {'user': user, 'domain': current_site, 'uidb64': uid, 'token': token, })  # render with dynamic value
+
+            send_mail(subject, message, email_from, to_email, html_message=html_content)
+
+            return HttpResponseRedirect('/signup/activation_sent/')
     else:
         form = SignUpForm()
     return render(request, 'contas/signUp.html', {'form': form})
-
 
 def activate(request, uidb64, token):
     try:
@@ -101,6 +102,8 @@ def activate(request, uidb64, token):
         user.profile.email_confirmed = True
         user.save()
         login(request, user)
+        HttpResponse('Account activated successfully')
+        time.sleep(5)
         return redirect('url_home')
     else:
         return render(request, 'contas/account_activation_invalid.html')
