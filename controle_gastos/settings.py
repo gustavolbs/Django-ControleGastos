@@ -128,6 +128,6 @@ django_heroku.settings(locals())
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'gustavolbs'
-EMAIL_HOST_PASSWORD = 'guga2610'
+EMAIL_HOST_PASSWORD = 'guga26101999'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
