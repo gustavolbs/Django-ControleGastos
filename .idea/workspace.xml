@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b867769-cf33-41d3-8a2b-a2d5e2dba344" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contas/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/contas/form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contas/templates/contas/activate.html" beforeDir="false" afterPath="$PROJECT_DIR$/contas/templates/contas/activate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contas/templates/contas/activation_sent.html" beforeDir="false" afterPath="$PROJECT_DIR$/contas/templates/contas/activation_sent.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contas/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/contas/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle_gastos/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle_gastos/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle_gastos/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle_gastos/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -115,13 +109,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="126" />
-          <entry key="py" value="2094" />
+          <entry key="py" value="2232" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="126" />
-          <entry key="Python" value="2094" />
+          <entry key="Python" value="2232" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -140,7 +134,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controle_gastos/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
@@ -161,14 +155,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/contas/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="108" column="30" lean-forward="true" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+            <state relative-caret-position="320">
+              <caret line="94" column="37" lean-forward="true" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
-                <marker date="1536353015188" expanded="true" signature="4098:4099" ph="..." />
+                <marker date="1536357940882" expanded="true" signature="4316:4317" ph="..." />
               </folding>
             </state>
           </provider>
@@ -286,11 +280,11 @@
         <option value="$PROJECT_DIR$/contas/templates/contas/login.html" />
         <option value="$PROJECT_DIR$/contas/models.py" />
         <option value="$PROJECT_DIR$/contas/templates/contas/activation_sent.html" />
-        <option value="$PROJECT_DIR$/contas/views.py" />
         <option value="$PROJECT_DIR$/contas/form.py" />
         <option value="$PROJECT_DIR$/contas/templates/contas/activate.html" />
         <option value="$PROJECT_DIR$/controle_gastos/urls.py" />
         <option value="$PROJECT_DIR$/controle_gastos/settings.py" />
+        <option value="$PROJECT_DIR$/contas/views.py" />
       </list>
     </option>
   </component>
@@ -625,6 +619,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controle_gastos/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="130" column="23" selection-start-line="130" selection-start-column="23" selection-end-line="130" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controle_gastos/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -637,19 +638,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/contas/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="108" column="30" lean-forward="true" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+        <state relative-caret-position="320">
+          <caret line="94" column="37" lean-forward="true" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-            <marker date="1536353015188" expanded="true" signature="4098:4099" ph="..." />
+            <marker date="1536357940882" expanded="true" signature="4316:4317" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controle_gastos/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="130" column="23" selection-start-line="130" selection-start-column="23" selection-end-line="130" selection-end-column="23" />
         </state>
       </provider>
     </entry>

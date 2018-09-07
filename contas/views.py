@@ -83,9 +83,11 @@ def signUp(request):
 
             html_content = render_to_string('contas/activate.html', {'user': user, 'domain': current_site, 'uidb64': uid, 'token': token, })  # render with dynamic value
 
-            send_mail(subject, message, email_from, to_email, html_message=html_content)
+            # send_mail(subject, message, email_from, to_email, html_message=html_content)
+            # return HttpResponseRedirect('{0}/activate/{1}/{2}/'.format(current_site, uid, token))
+            return render(request, 'contas/activate.html',{'user': user, 'domain': current_site, 'uidb64': uid, 'token': token, })
+            # return HttpResponseRedirect(request, )
 
-            return HttpResponseRedirect('/signup/activation_sent/')
     else:
         form = SignUpForm()
     return render(request, 'contas/signUp.html', {'form': form})
