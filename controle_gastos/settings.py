@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['192.168.15.8', '127.0.0.1', '0.0.0.0', 'localhost', 'controle-gasto.herokuapp.com']
+ALLOWED_HOSTS = ['192.168.15.8', '127.0.0.1', '0.0.0.0', 'localhost', 'controller-gastos.herokuapp.com']
 
 
 # Application definition
@@ -128,6 +128,6 @@ django_heroku.settings(locals())
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'gustavolbs'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'guga26101999'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
