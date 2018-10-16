@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponseRedirect, HttpResponse
@@ -10,7 +10,7 @@ from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from contas.tokens import account_activation_token
 from .models import Transacao
-from .form import TransacaoForm, SignUpForm
+from .form import TransacaoForm, SignUpForm, UserLoginForm
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
 from django.template import Context
@@ -30,14 +30,14 @@ def home(request):
 def nova_transacao(request):
     form = TransacaoForm(request.POST or None)
     if form.is_valid():
-        if request.user.is_authenticated:
+        #if request.user.is_authenticated:
             if request.user.is_superuser:
                 form.save()
                 return redirect('url_home')
             else:
                 return redirect('url_notSuper')
-        else:
-            return redirect('url_login')
+       # else:
+        #    return redirect('url_login')
     return render(request, "contas/form.html", {"form": form})
 
 
@@ -111,6 +111,17 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'contas/account_activation_invalid.html')
 
+
+def login(request):
+    title = "Login"
+    form = UserLoginForm(request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(username=username,password=password)
+        login(request, user)
+        return redirect('url_home')
+    return render(request, 'contas/login.html', {'form':form, 'title':title})
 
 
 def notSuper(request):

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from contas.views import home, nova_transacao, update, delete, notSuper, signUp, activation_sent, activate
+from contas.views import home, nova_transacao, update, delete, notSuper, signUp, activation_sent, activate, login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,7 @@ urlpatterns = [
     path('403/', notSuper, name='url_notSuper'),
     path('form/', nova_transacao, name='url_novaTransacao'),
     path('signup/', signUp, name='url_signUp'),
+    path('login/', login, name='url_login'),
     path('signup/activation_sent/', activation_sent, name='url_activationSent'),
     path('activate/<slug:uidb64>/<slug:token>/', activate, name='activate'),
 
