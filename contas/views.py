@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponseRedirect, HttpResponse
@@ -10,7 +10,7 @@ from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from contas.tokens import account_activation_token
 from .models import Transacao
-from .form import TransacaoForm, SignUpForm, UserLoginForm
+from .form import TransacaoForm, SignUpForm, LoginForm
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
 from django.template import Context
@@ -112,16 +112,29 @@ def activate(request, uidb64, token):
         return render(request, 'contas/account_activation_invalid.html')
 
 
-def login(request):
-    title = "Login"
-    form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        username = form.cleaned_data.get("username")
-        password = form.cleaned_data.get("password")
-        user = authenticate(username=username,password=password)
-        login(request, user)
+def my_login(request):
+    if request.user.is_authenticated:
         return redirect('url_home')
-    return render(request, 'contas/login.html', {'form':form, 'title':title})
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request,
+                                username=cd['username'],
+                                password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponse('Authenticated successfully')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid Login')
+    else:
+        form = LoginForm()
+        # return HttpResponse('Tú errou a senha ou usuário, BURRÃO!')
+    return render(request, 'contas/login.html', {'form': form})
 
 
 def notSuper(request):
